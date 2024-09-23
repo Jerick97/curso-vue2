@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Directiva : v-for</title>
+    <script src="assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" class="w-100 container mx-auto p-4 bg-body-tertiary text-center">
+        <h1>Lista de temeas para Estudiar</h1>
+
+        <ul class="list-group">
+            <li class="list-group-item" v-for="elemento in tareas">{{elemento}}</li>
+        </ul>
+        <hr>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="persona in personas">{{persona.nombre}}</li>
+        </ul>
+    </div>
+</body>
+<script>
+    let myApp = new Vue({
+        el: "#app",
+        data: {
+            tareas: ["Html5", "CSS3", "Vue.js", "Angular", "Nuxt.js"],
+            personas: [{
+                nombre: "Jerick",
+                edad: 18
+            },
+            {
+                nombre: "Selene",
+                edad: 22
+            },
+            {
+                nombre: "Flor",
+                edad: 24
+            }]
+        }
+    })
+</script>
+
+</html>

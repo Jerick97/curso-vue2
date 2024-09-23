@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Directivas</title>
+    <script src="assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" class="w-100">
+        <div class="container mx-auto text-center bg-body-tertiary p-4">
+            <h1 v-show="edad>18">Eres mayor de edad</h1>
+            <input type="text" v-model:value="edad">
+        </div>
+    </div>
+</body>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            edad: 19
+        }
+    })
+</script>
+
+</html>

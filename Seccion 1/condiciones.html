@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <title>Condicionales</title>
+    <script src="assets/js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" class="w-100 container mx-auto p-4 bg-body-tertiary text-center">
+        <button v-on:click="kiss++" class="btn btn-primary">Kiss 👄 {{kiss}}</button>
+        <p v-if="kiss<3">Sapo 🐸</p>
+        <p v-else>Principe 🤴</p>
+    </div>
+</body>
+<script>
+    let myApp = new Vue({
+        el: "#app",
+        data: {
+            kiss: 0
+        }
+    })
+</script>
+
+</html>
