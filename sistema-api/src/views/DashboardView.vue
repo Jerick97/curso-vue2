@@ -3,6 +3,9 @@
         <TheHeader />
 
         <div class="container p-4">
+            <div class="mb-2 d-flex justify-content-start align-items-center">
+                <button v-on:click="crear()" class="btn btn-primary" type="button">Crear Post</button>
+            </div>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -44,6 +47,9 @@ export default {
     methods: {
         editar(id) {
             this.$router.push(`/edit/${id}`)
+        },
+        crear() {
+            this.$router.push("/new")
         }
     }
     ,

@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import DashboardView from "../views/DashboardView.vue";
 import EditView from "../views/EditView.vue";
+import NewView from "../views/NewView.vue";
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,11 @@ const routes = [
 		path: "/edit/:id",
 		name: "edit",
 		component: EditView,
+	},
+	{
+		path: "/new",
+		name: "new",
+		component: NewView,
 	},
 ];
 

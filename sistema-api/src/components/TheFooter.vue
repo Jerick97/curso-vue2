@@ -1,6 +1,6 @@
 <template>
     <div>
-        <footer class="d-flex justify-content-between align-items-center container-fluid bg-black p-4 text-white">
+        <footer class="d-flex justify-content-between align-items-center container-fluid p-4 text-white">
             <div>© 2024 Messirve™ All Rights Reserved.</div>
             <div class="d-flex justify-content-between g-4 w-50 text-white">
                 <a href="#" class="text-decoration-none text-white">
@@ -26,5 +26,6 @@ footer {
     height: 60px;
     bottom: 0;
     width: 100%;
+    background-color: black;
 }
 </style>

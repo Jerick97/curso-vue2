@@ -1,7 +1,6 @@
 <template>
     <div>
         <TheHeader />
-
         <div class="container mx-auto p-4">
             <div class="row">
                 <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -14,17 +13,16 @@
                             </div>
                             <form>
                                 <div class="form-floating mb-3">
-                                    <textarea type="text" class="form-control" id="floatingTextarea1"
-                                        style="height: 100px" v-model="form.title" placeholder="Title"></textarea>
+                                    <input type="text" class="form-control" id="floatingInput1" v-model="form.title"
+                                        placeholder="title">
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <textarea type="text" class="form-control" id="floatingTextarea2"
-                                        style="height: 120px" v-model="form.body" placeholder="Body"></textarea>
+                                    <input type="text" class="form-control" id="floatingInput2" v-model="form.body"
+                                        placeholder="body">
                                 </div>
                                 <div class="d-flex gap-2 w-100 justify-content-between">
-                                    <button class="btn btn-success" type="button" v-on:click="editar()">Editar</button>
-                                    <button class="btn btn-danger" type="button"
-                                        v-on:click="eliminar()">Eliminar</button>
+                                    <button class="btn btn-success" type="button"
+                                        v-on:click="guardar()">Guardar</button>
                                     <button class="btn btn-primary" type="button" v-on:click="salir()">Salir</button>
                                 </div>
                             </form>
@@ -33,53 +31,43 @@
                 </div>
             </div>
         </div>
-
-
         <TheFooter />
     </div>
 </template>
 
 <script>
-import TheHeader from '@/components/TheHeader.vue'
-import TheFooter from '@/components/TheFooter.vue'
-import axios from 'axios'
-
+import TheHeader from "../components/TheHeader"
+import TheFooter from "../components/TheFooter"
+import axios from "axios";
 export default {
-    name: "EditView",
+    name: "NewView",
     components: {
         TheHeader,
         TheFooter
     },
     data: function () {
         return {
-            postId: null,
             form: {
-                id: null,
                 title: null,
                 body: null,
-                userId: null,
+                userId: 1,
             }
         }
     },
     methods: {
-        editar() {
-            axios.put("https://jsonplaceholder.typicode.com/posts/" + this.postId, this.form)
+        guardar() {
+            axios.post("https://jsonplaceholder.typicode.com/posts", this.form)
                 .then(data => {
                     console.log(data)
-                    this.makeToast("Success", "El Post fue actualizado con éxito", "success")
+                    this.makeToast("Success", "El Post fue creado con éxito", "success")
+                    this.$router.push("/dashboard")
+                }).cath(e => {
+                    console.log(e)
+                    this.makeToast("Error", "Error al guardar", "error")
                 })
         },
         salir() {
             this.$router.push("/dashboard")
-        },
-        eliminar() {
-            axios.delete("https://jsonplaceholder.typicode.com/posts/" + this.postId, {
-                headers: {
-                    'Content-type': 'application/json; charset=UTF-8',
-                }
-            }).then(
-                this.$router.push("/dashboard")
-            )
         },
         makeToast(title, text, variant = null) {
             this.$bvToast.toast(text, {
@@ -90,16 +78,11 @@ export default {
             })
         }
     }
-    ,
-    mounted: function () {
-        this.postId = this.$route.params.id;
-        axios.get("https://jsonplaceholder.typicode.com/posts/" + this.postId)
-            .then(datos => {
-                this.form.id = datos.data.id,
-                    this.form.title = datos.data.title,
-                    this.form.body = datos.data.body,
-                    this.form.userId = datos.data.userId
-            })
-    }
 }
 </script>
+
+<style>
+.toast:not(.show) {
+    display: block;
+}
+</style>
