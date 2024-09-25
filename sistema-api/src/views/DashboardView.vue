@@ -2,22 +2,20 @@
     <div>
         <TheHeader />
 
-        <div class="container mt-4">
+        <div class="container p-4">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">Titulo</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Comentario</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="comentario in ListaComentarios" :key="comentario.id" v-on:click="editar(comentario.id)">
-                        <th scope="row">{{ comentario.id }}</th>
-                        <td>{{ comentario.name }}</td>
-                        <td>{{ comentario.email }}</td>
-                        <td>{{ comentario.body }}</td>
+                    <tr v-for="post in listaPosts" :key="post.id" v-on:click="editar(post.id)">
+                        <th scope="row">{{ post.id }}</th>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.body }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -35,7 +33,7 @@ export default {
     name: "DashboardView",
     data() {
         return {
-            ListaComentarios: null,
+            listaPosts: null,
             pagina: 1
         }
     },
@@ -45,15 +43,17 @@ export default {
     },
     methods: {
         editar(id) {
-            console.log(id)
+            this.$router.push(`/edit/${id}`)
         }
     }
     ,
     mounted: function () {
-        let url = "https://jsonplaceholder.typicode.com/comments?postId=" + this.pagina;
-        axios.get(url).then(data => {
-            this.ListaComentarios = data.data;
-        })
+        let url = "https://jsonplaceholder.typicode.com/posts";
+        axios.get(url).then(response => {
+            this.listaPosts = response.data.filter(post => post.userId === this.pagina);
+        }).catch(error => {
+            console.error("Error fetching posts:", error);
+        });
     }
 }
 </script>
